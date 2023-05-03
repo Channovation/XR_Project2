@@ -8,6 +8,7 @@ public class BlockMove : MonoBehaviour
     public bool move = false;
     public float blockMoveTime = 0.3f;
     public float blockMoveSpeed = 2.0f;
+    // Start is called before the first frame update
 
     private IEnumerator moveBlockTime(Vector3 dir)
     {
@@ -18,7 +19,7 @@ public class BlockMove : MonoBehaviour
         Vector3 currentPosition = transform.position;
         Vector3 targetPosition = currentPosition + dir;
 
-        while(elapsedTime < blockMoveTime)
+        while (elapsedTime < blockMoveTime)
         {
             transform.position = Vector3.Lerp(currentPosition, targetPosition, elapsedTime / blockMoveTime);
             elapsedTime += Time.deltaTime;
@@ -26,14 +27,12 @@ public class BlockMove : MonoBehaviour
         }
         transform.position = transform.position;
         move = false;
-
     }
-
-
+   
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetMouseButtonDown(0) &&  move == false)
+        if (Input.GetMouseButtonDown(0) && move == false)
         {
             StartCoroutine(moveBlockTime(new Vector3(0.0f, 0.0f, 1.0f)));
         }

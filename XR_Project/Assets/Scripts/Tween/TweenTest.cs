@@ -1,25 +1,20 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using DG.Tweening;      //tween 사용
+using DG.Tweening;
 
 public class TweenTest : MonoBehaviour
 {
-
-    public bool isPunch = false;
-
     Sequence sequence;
-
+    public bool isPunch = false;
     private Renderer renderer;
-
     // Start is called before the first frame update
     void Start()
     {
-        //transform.DOMoveX(5, 2);        //x축으로 5만큼 2초동안 이동
-        //transform.DORotate(new Vector3(0, 0, 180), 2);  //z축으로 180도 회전 2초 동안
-        //transform.DOScale(new Vector3(2, 2, 2), 2);     //2배 확대 2초 동안
+        //transform.DOMoveX(5, 2);      // x축으로 5만큼 2초동안 이동
+        //transform.DORotate(new Vector3(0, 0, 180), 2);     // z축 중심으로 180도 회전 2초 동안
+        //transform.DOScale(new Vector3(2, 2, 2), 2);     //x2 배 확대 2초 동안
 
-        //Sequence sequence = DOTween.Sequence();
         sequence = DOTween.Sequence();
 
         sequence.Append(transform.DOMoveX(5, 2));
@@ -27,27 +22,24 @@ public class TweenTest : MonoBehaviour
         sequence.Append(transform.DOScale(new Vector3(2, 2, 2), 2));
         sequence.SetLoops(-1, LoopType.Yoyo);
 
-        //transform.DOMoveX(5, 2).SetEase(Ease.OutBounce).OnComplete(Deactivateobject);
+        //transform.DOMoveX(5, 2).SetEase(Ease.OutBounce);
         //transform.DOShakeRotation(2, new Vector3(0, 0, 180), 10, 90);
-
         renderer = GetComponent<Renderer>();
     }
 
-    void Deactivateobject()
-    {
-        gameObject.SetActive(false);
-    }
+    
+
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Backspace))
+        if(Input.GetKeyDown(KeyCode.Backspace))
         {
             sequence.Kill();
         }
 
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            if (!isPunch)
+            if(!isPunch)
             {
                 isPunch = true;
                 transform.DOPunchScale(new Vector3(0.5f, 0.5f, 0.5f), 0.1f, 10, 1).OnComplete(EndPunch);
@@ -57,8 +49,9 @@ public class TweenTest : MonoBehaviour
                 renderer.material.DOColor(color, 0.1f)
                     .SetEase(Ease.InOutQuad)
                     .SetAutoKill(false);
-                 
+
                 renderer.material.DOPlay();
+
             }
         }
     }
@@ -66,9 +59,10 @@ public class TweenTest : MonoBehaviour
     void EndPunch()
     {
         isPunch = false;
+        
     }
 
-    void DeacticateObject()
+    void DeactivateObiect()
     {
         gameObject.SetActive(false);
     }

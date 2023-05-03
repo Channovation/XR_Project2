@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class test3 : MonoBehaviour
+public class Test_array : MonoBehaviour
 {
 
     public int[] Array = new int[5];
@@ -16,11 +16,10 @@ public class test3 : MonoBehaviour
         Array[3] = 15;
         Array[4] = 100;
 
-        for(int i = 0; i< Array.Length; i++)
+        for (int i = 0; i < Array.Length; i++)
         {
             Debug.Log(Array[i]);
         }
-
     }
 
     // Update is called once per frame
