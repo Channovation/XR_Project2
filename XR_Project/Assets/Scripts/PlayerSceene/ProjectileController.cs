@@ -5,13 +5,17 @@ using UnityEngine;
 public class ProjectileController : MonoBehaviour
 {
 
+    [SerializeField] protected SoundProfileData soundProfileData;
+
     public Vector3 launchDirection;
     public GameObject projectile;
+    protected AudioManager AudioManager => AudioManager.Instance;
 
 
     // Start is called before the first frame update
     public void FireProjectile()
     {
+        AudioManager.PlayOneShot(soundProfileData.GetRandomClip());
         GameObject temp = (GameObject)Instantiate(projectile);
 
         temp.transform.position = this.gameObject.transform.position;
