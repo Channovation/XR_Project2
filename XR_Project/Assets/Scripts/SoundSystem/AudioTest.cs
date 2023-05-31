@@ -11,16 +11,16 @@ public class AudioTest : MonoBehaviour
 
     private void Start()
     {
-        audioManager.PlayMusic(BGMProfileData.GetRandomClip());
+        //audioManager.PlayMusic(BGMProfileData.GetRandomClip());
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        if(Input.GetKeyDown(KeyCode.Space))
         {
             audioManager.FadeInMusic(BGMProfileData.GetRandomIndex(0), 3.0f);
         }
-
+       
     }
 }

@@ -5,30 +5,23 @@ using DG.Tweening;
 
 public class TweenTest : MonoBehaviour
 {
-    Sequence sequence;
     public bool isPunch = false;
+    Sequence sequence;
     private Renderer renderer;
     // Start is called before the first frame update
     void Start()
-    {
-        //transform.DOMoveX(5, 2);      // x축으로 5만큼 2초동안 이동
-        //transform.DORotate(new Vector3(0, 0, 180), 2);     // z축 중심으로 180도 회전 2초 동안
-        //transform.DOScale(new Vector3(2, 2, 2), 2);     //x2 배 확대 2초 동안
-
+    {       
         sequence = DOTween.Sequence();
-
         sequence.Append(transform.DOMoveX(5, 2));
         sequence.Append(transform.DORotate(new Vector3(0, 0, 180), 2));
         sequence.Append(transform.DOScale(new Vector3(2, 2, 2), 2));
         sequence.SetLoops(-1, LoopType.Yoyo);
-
-        //transform.DOMoveX(5, 2).SetEase(Ease.OutBounce);
-        //transform.DOShakeRotation(2, new Vector3(0, 0, 180), 10, 90);
+        //transform.DOMoveX(5, 2).SetEase(Ease.OutBounce).OnComplete(DeactivateObject);
+        //transform.DOShakeRotation(2, new Vector3(0,0,180), 10 ,90);
         renderer = GetComponent<Renderer>();
     }
 
-    
-
+   
     // Update is called once per frame
     void Update()
     {
@@ -36,8 +29,7 @@ public class TweenTest : MonoBehaviour
         {
             sequence.Kill();
         }
-
-        if (Input.GetKeyDown(KeyCode.Space))
+        if(Input.GetKeyDown(KeyCode.Space))
         {
             if(!isPunch)
             {
@@ -51,7 +43,6 @@ public class TweenTest : MonoBehaviour
                     .SetAutoKill(false);
 
                 renderer.material.DOPlay();
-
             }
         }
     }
@@ -59,11 +50,11 @@ public class TweenTest : MonoBehaviour
     void EndPunch()
     {
         isPunch = false;
-        
     }
 
-    void DeactivateObiect()
+    void DeactivateObject()
     {
         gameObject.SetActive(false);
     }
+
 }
